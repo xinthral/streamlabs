@@ -55,7 +55,7 @@ def Execute(data):
     if data.GetParam(0) != Command:
         return
 
-    Log(data.getParam(1))
+    Log(data.GetParam(1))
     for line in getText()[1].split(Database._delim):
         send_message(line)
         time.sleep(2)
