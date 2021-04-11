@@ -54,8 +54,8 @@ def Init():
 def Execute(data):
     """ Command Execution Method """
     global Options
-    if data.GetParam(0) == Command:
-        if data.GetParam(1) not in Options:
+    if data.GetParam(0).lower() == Command:
+        if data.GetParam(1).lower() not in Options:
             Log(data.GetParam(1))
             for line in getText()[1].split(Database._delim):
                 send_message(line)

@@ -16,7 +16,7 @@ class Database:
     """ Static Class Scope Variables """
     _delim = ';::;'
     _library = 'Services/Scripts/xbot/library.db'
-    _tables = ['jokes', 'phrases', 'wur']
+    _tables = ['facts', 'jokes', 'phrases', 'wur']
 
     @staticmethod
     def create_connection(db_file=_library):
@@ -61,6 +61,12 @@ class Database:
         con.commit()
         con.close()
         return(True)
+
+    @staticmethod
+    def insertFact(payload):
+        """ Insert fact payload into database object (wrapper) """
+        #payload: ['input text', 'category', blocked: 0/1]
+        return(Database.insert(payload, 'facts'))
 
     @staticmethod
     def insertJoke(payload):
