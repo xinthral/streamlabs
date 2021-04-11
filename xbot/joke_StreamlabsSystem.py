@@ -24,8 +24,7 @@ Creator = "Xinthral"
 Version = "0.0.1"
 Command = "!joke"
 SQLTable = 'jokes'
-TextRepo = Database.queryTableAll(SQLTable)
-random.seed(time.time())
+TextRepo = list()
 
 def getText():
     global TextRepo
@@ -41,6 +40,9 @@ def send_message(message):
 
 def Init():
     """ Constructor API Method """
+    global TextRepo
+    TextRepo = Database.queryTableAll(SQLTable)
+    random.seed(time.time())
     return
 
 def Execute(data):

@@ -17,7 +17,6 @@ finally:
     import sqlite3
     import time
 
-
 ScriptName = "Would you rather?"
 Website = "https://www.lmgtfy.com"
 Description = "Questionnaire Script for the memez"
@@ -25,8 +24,7 @@ Creator = "Xinthral"
 Version = "0.0.1"
 Command = "!rather"
 SQLTable = 'wur'
-TextRepo = Database.queryTableAll(SQLTable)
-random.seed(time.time())
+TextRepo = list()
 
 def getText():
     global TextRepo
@@ -42,6 +40,9 @@ def send_message(message):
 
 def Init():
     """ Constructor API Method """
+    global TextRepo
+    TextRepo = Database.queryTableAll(SQLTable)
+    random.seed(time.time())
     return
 
 def Execute(data):
