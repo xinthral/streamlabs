@@ -40,9 +40,9 @@ def send_message(message):
 
 def Log(message):
     """ Log output to Built-in Logfile """
-    Parent.log(Command, message)
+    Parent.Log(Command, message)
     return
-    
+
 def Init():
     """ Constructor API Method """
     global TextRepo
