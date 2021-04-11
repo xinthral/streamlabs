@@ -45,20 +45,24 @@ def Log(message):
 
 def Init():
     """ Constructor API Method """
-    global TextRepo
+    global TextRepo, Options
     TextRepo = Database.queryTableAll(SQLTable)
+    Options = ['add', 'del', 'rem' ,'list', 'search', 'find']
     random.seed(time.time())
     return
 
 def Execute(data):
     """ Command Execution Method """
-    if data.GetParam(0) != Command:
-        return
-
-    username = data.UserName
-    for line in getText()[1].split(Database._delim):
-        send_message(line)
-        time.sleep(2)
+    global Options
+    if data.GetParam(0) == Command:
+        if data.GetParam(1) not in Options:
+            Log(data.GetParam(1))
+            for line in getText()[1].split(Database._delim):
+                send_message(line)
+                time.sleep(2)
+        else:
+            """ handle options """
+            send_message('Your command shall not pass.')
     return
 
 def Tick():
