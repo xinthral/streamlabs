@@ -38,6 +38,11 @@ def send_message(message):
     Parent.SendStreamMessage(message)
     return
 
+def Log(message):
+    """ Log output to Built-in Logfile """
+    Parent.log(Command, message)
+    return
+
 def Init():
     """ Constructor API Method """
     global TextRepo
@@ -50,7 +55,7 @@ def Execute(data):
     if data.GetParam(0) != Command:
         return
 
-    username = data.UserName
+    Log(data.getParam(1))
     for line in getText()[1].split(Database._delim):
         send_message(line)
         time.sleep(2)
@@ -59,6 +64,5 @@ def Execute(data):
 def Tick():
     """ Timed Event Loop Method """
     return
-
 
 # Xinthral's Sql Handler file

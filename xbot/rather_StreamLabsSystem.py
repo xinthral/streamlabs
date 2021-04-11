@@ -38,6 +38,11 @@ def send_message(message):
     Parent.SendStreamMessage(message)
     return
 
+def Log(message):
+    """ Log output to Built-in Logfile """
+    Parent.log(Command, message)
+    return
+    
 def Init():
     """ Constructor API Method """
     global TextRepo
