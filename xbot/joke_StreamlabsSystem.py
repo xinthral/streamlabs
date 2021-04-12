@@ -12,6 +12,7 @@ finally:
     import sys
     import nt
     sys.path.insert(1, nt.getcwd() + "\\Services\\Scripts\\xbot")
+    from settings import MySettings
     from xsql import Database
     import random
     import sqlite3
@@ -21,11 +22,12 @@ ScriptName = "Joke"
 Website = "https://www.lmgtfy.com"
 Description = "Joke Script for the lulz"
 Creator = "Xinthral"
-Version = "0.0.1"
+Version = "0.0.2"
 Command = "!joke"
 SQLTable = 'jokes'
 TextRepo = list()
 Options = list()
+Settings= dict()
 
 def getText():
     global TextRepo
@@ -46,9 +48,10 @@ def Log(message):
 
 def Init():
     """ Constructor API Method """
-    global TextRepo, Options
-    TextRepo = Database.queryTableAll(SQLTable)
+    global Options, Settings, TextRepo
     Options = ['add', 'del', 'rem' ,'list', 'search', 'find']
+    Settings = MySettings(Command, 'settings.json')
+    TextRepo = Database.queryTableAll(SQLTable)
     random.seed(time.time())
     return
 

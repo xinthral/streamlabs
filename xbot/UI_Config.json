@@ -1,4 +1,9 @@
 {
     "output_file": "settings.json",
-    
+    "userCooldownGlobal": {
+        "type": "numberbox",
+        "value": 60,
+        "label": "Global User Cooldown",
+        "tooltip": "Amount of time users are put on cooldown from xBot commands (in seconds)"
+    }
 }
