@@ -28,7 +28,7 @@ def getFact(Parent):
     return(fact.split("<div id='z'>")[1].split("<br/>")[0])
 
 def getText(Parent, SQLTable):
-    # global Facts, Jokes, Phrases, Rathers
+    global Facts, Jokes, Phrases, Rathers
     responseText = None
     TextRepo = None
 
@@ -41,15 +41,13 @@ def getText(Parent, SQLTable):
     if SQLTable == 'wur':
         TextRepo = Rathers
 
-    if len(TextRepo) == 0:
+    if len(TextRepo) <= 1:
         if SQLTable == 'facts':
-            responseText = (0,getFact(Parent),)
+            responseText = (0, getFact(Parent),)
         else:
+            responseText = TextRepo.pop(0)
             TextRepo = Database.queryTableAll(SQLTable)
-    elif len(TextRepo) == 1:
-        responseText = TextRepo.pop(0)
-        TextRepo = Database.queryTableAll(SQLTable)
-
+        
     if responseText == None:
         responseText = TextRepo.pop(random.randrange(0, len(TextRepo)))
 
