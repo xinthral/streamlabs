@@ -7,6 +7,7 @@ except:
 finally:
     import os
     import random
+    import re
     import sqlite3
     import sys
     import time
@@ -16,16 +17,28 @@ finally:
 
 random.seed(time.time())
 Options = MySettings._Options
+Version = MySettings._Version
+versionRegex = re.compile(r"(\d\.\d\.\d)")
+versionURL = 'https://raw.githubusercontent.com/xinthral/streamlabs/main/version.txt'
 Facts = list()
 Jokes = list()
 Phrases = list()
 Rathers = list()
 
+def checkVersion(Parent):
+    # '{\n "code": 200,\n "response": "0.0.1\n"\n}'
+    updateMessage = 'xBot has an update pending'
+    req = Parent.GetRequest(versionURL, {})
+    latestVersion = versionRegex.search(req).group(0)
+    if latestVersion != Version:
+        Log(Parent, 'VersionCheck', updateMessage)
+        send_message(Parent, updateMessage + ': https://github.com/xinthral/streamlabs')
+
 def getFact(Parent):
     """ Randomly Query a fact from the internets """
-    url = "http://randomfactgenerator.net/"
+    url = 'http://randomfactgenerator.net/'
     fact = Parent.GetRequest(url, {})
-    return(fact.split("<div id='z'>")[1].split("<br/>")[0])
+    return(fact.split("<div id='z'>")[1].split('<br/>')[0])
 
 def getRepo(SQLTable):
     """ Select active repository """
@@ -72,6 +85,7 @@ def Skits(Command, SQLTable, Parent, data):
     # global Options
     Settings = MySettings(Command, 'settings.json')
     if data.GetParam(0).lower() == Command:
+        # checkVersion(Parent)
         if data.GetParam(1).lower() not in Options:
             for line in getText(Parent, SQLTable)[1].split(Database._delim):
                 Log(Parent, Command, line)

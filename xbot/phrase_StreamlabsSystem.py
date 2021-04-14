@@ -12,7 +12,7 @@ finally:
     import sys
     sys.path.append(os.path.dirname(__file__))
     from settings import MySettings
-    from scripts import Skits
+    from scripts import Skits, checkVersion
 
 ScriptName = "Phrase"
 Website = "https://www.lmgtfy.com"
@@ -25,6 +25,7 @@ Options = MySettings._Options
 
 def Init():
     """ Constructor API Method """
+    # checkVersion(Parent)
     return
 
 def Execute(data):

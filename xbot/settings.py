@@ -4,6 +4,7 @@ import json
 
 class MySettings(object):
 	_Options = ['add', 'del', 'rem' ,'list', 'search', 'find']
+	_Version = '0.0.1'
 
 	def __init__(self, inputCommand="!ping", settingsfile=None):
 		try:
