@@ -28,6 +28,7 @@ def getFact(Parent):
     return(fact.split("<div id='z'>")[1].split("<br/>")[0])
 
 def getRepo(SQLTable):
+    """ Select active repository """
     global Facts, Jokes, Phrases, Rathers
     responseRepo = None
     if SQLTable == 'facts':
@@ -41,6 +42,7 @@ def getRepo(SQLTable):
     return(responseRepo)
 
 def getText(Parent, SQLTable):
+    """ Return output text for given input command """
     TextRepo = getRepo(SQLTable)
     responseText = None
 
