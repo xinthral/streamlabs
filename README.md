@@ -23,3 +23,6 @@ Once the script is imported, each feature needs to enabled individually:
 
 Located along with the import icon, is an output log for the functions (yellow) and an error log (red).
 ![Additional Icon Details](https://github.com/xinthral/streamlabs/blob/main/photos/8_logging_icons.jpg?raw=true)
+
+### Testing
+<img src="https://github.com/xinthral/streamlabs/blob/main/photos/1_missing_scripts_tab.jpg?raw=true" height="50" width="50">
