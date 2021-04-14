@@ -25,4 +25,4 @@ Located along with the import icon, is an output log for the functions (yellow) 
 ![Additional Icon Details](https://github.com/xinthral/streamlabs/blob/main/photos/8_logging_icons.jpg?raw=true)
 
 ### Testing
-<img src="https://github.com/xinthral/streamlabs/blob/main/photos/1_missing_scripts_tab.jpg?raw=true" height="50" width="50">
+<img src="https://github.com/xinthral/streamlabs/blob/main/photos/1_missing_scripts_tab.jpg?raw=true" height="250" width="250">
