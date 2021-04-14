@@ -1,12 +1,13 @@
 try:
-    import sqlite3
-except:
     import clr
     clr.AddReference("IronPython.SQLite.dll")
     clr.AddReference("IronPython.Modules.dll")
+except:
+    pass
 finally:
     import os
     import random
+    import sqlite3
     import sys
     import time
     sys.path.append(os.path.dirname(__file__))
@@ -14,7 +15,7 @@ finally:
     from xsql import Database
 
 random.seed(time.time())
-Options = ['add', 'del', 'rem' ,'list', 'search', 'find']
+Options = MySettings._Options
 Facts = list()
 Jokes = list()
 Phrases = list()
@@ -24,22 +25,24 @@ def getFact(Parent):
     """ Randomly Query a fact from the internets """
     url = "http://randomfactgenerator.net/"
     fact = Parent.GetRequest(url, {})
-    # Log(Parent, '!fact', fact.split("<div id='z'>")[1].split("<br/>")[0])
     return(fact.split("<div id='z'>")[1].split("<br/>")[0])
 
-def getText(Parent, SQLTable):
+def getRepo(SQLTable):
     global Facts, Jokes, Phrases, Rathers
-    responseText = None
-    TextRepo = None
-
+    responseRepo = None
     if SQLTable == 'facts':
-        TextRepo = Facts
+        responseRepo = Facts
     if SQLTable == 'jokes':
-        TextRepo = Jokes
+        responseRepo = Jokes
     if SQLTable == 'phrases':
-        TextRepo = Phrases
+        responseRepo = Phrases
     if SQLTable == 'wur':
-        TextRepo = Rathers
+        responseRepo = Rathers
+    return(responseRepo)
+
+def getText(Parent, SQLTable):
+    TextRepo = getRepo(SQLTable)
+    responseText = None
 
     if SQLTable == 'facts':
         responseText = (0, getFact(Parent),)
@@ -51,7 +54,6 @@ def getText(Parent, SQLTable):
 
     if responseText == None:
         responseText = TextRepo.pop(random.randrange(0, len(TextRepo)))
-
     return(responseText)
 
 def Log(Parent, Command, message):
@@ -65,7 +67,7 @@ def send_message(Parent, message):
     return
 
 def Skits(Command, SQLTable, Parent, data):
-    global Options
+    # global Options
     Settings = MySettings(Command, 'settings.json')
     if data.GetParam(0).lower() == Command:
         if data.GetParam(1).lower() not in Options:

@@ -3,6 +3,8 @@ import codecs
 import json
 
 class MySettings(object):
+	_Options = ['add', 'del', 'rem' ,'list', 'search', 'find']
+
 	def __init__(self, inputCommand="!ping", settingsfile=None):
 		try:
 			with codecs.open(settingsfile, encoding="utf-8-sig", mode="r") as f:

@@ -7,6 +7,7 @@ finally:
     import os
     import sys
     sys.path.append(os.path.dirname(__file__))
+    from settings import MySettings
     from scripts import Skits
 
 ScriptName = "Fact"
@@ -16,7 +17,7 @@ Creator = "Xinthral"
 Version = "0.0.3"
 Command = "!fact"
 SQLTable = 'facts'
-
+Options = MySettings._Options
 
 def Init():
     """ Constructor API Method """
