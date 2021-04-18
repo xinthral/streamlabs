@@ -1,3 +1,7 @@
+"""
+SLCB runs on IronPython, those cheeky whores:
+https://stackoverflow.com/a/66794423/13825434
+"""
 try:
     import clr
     clr.AddReference("IronPython.Modules.dll")
@@ -8,20 +12,19 @@ finally:
     import sys
     sys.path.append(os.path.dirname(__file__))
     from settings import MySettings
-    from scripts import Skits, checkVersion
+    from scripts import Skits #, checkVersion
 
 ScriptName = "Fact"
 Website = "https://www.lmgtfy.com"
 Description = "Fact Script for the infoz"
 Creator = "Xinthral"
-Version = "0.0.3"
+Version = MySettings._Version
 Command = "!fact"
 SQLTable = 'facts'
-Options = MySettings._Options
 
 def Init():
     """ Constructor API Method """
-    checkVersion(Parent)
+    # checkVersion(Parent)
     return
 
 def Execute(data):

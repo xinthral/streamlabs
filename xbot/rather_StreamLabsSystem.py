@@ -12,16 +12,15 @@ finally:
     import sys
     sys.path.append(os.path.dirname(__file__))
     from settings import MySettings
-    from scripts import Skits, checkVersion
+    from scripts import Skits #, checkVersion
 
 ScriptName = "Rather"
 Website = "https://www.lmgtfy.com"
 Description = "Questionnaire Script for the memez"
 Creator = "Xinthral"
-Version = "0.0.3"
+Version = MySettings._Version
 Command = "!rather"
-SQLTable = "wur"
-Options = MySettings._Options
+SQLTable = "rather"
 
 def Init():
     """ Constructor API Method """
