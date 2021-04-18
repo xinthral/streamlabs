@@ -27,9 +27,9 @@ Rathers = list()
 
 def checkVersion(Parent):
     # '{\n "code": 200,\n "response": "0.0.1\n"\n}'
-    updateMessage = 'xBot has an update pending'
     req = Parent.GetRequest(versionURL, {})
     latestVersion = versionRegex.search(req).group(0)
+    updateMessage = "xBot has an update pending : {}".format(latestVersion)
     if latestVersion != Version:
         Log(Parent, 'VersionCheck', updateMessage)
         send_message(Parent, updateMessage + ': https://github.com/xinthral/streamlabs')
@@ -50,7 +50,7 @@ def getRepo(SQLTable):
         responseRepo = Jokes
     if SQLTable == 'phrases':
         responseRepo = Phrases
-    if SQLTable == 'wur':
+    if SQLTable == 'rather':
         responseRepo = Rathers
     return(responseRepo)
 
@@ -61,6 +61,9 @@ def getText(Parent, SQLTable):
 
     if SQLTable == 'facts':
         responseText = (0, getFact(Parent),)
+    elif SQLTable == 'admin':
+        responseText = (0, 'Session Lock Complete...',)
+        os.system('python2 ./Services/Scripts/xbot/dbtables.py')
     elif len(TextRepo) == 0:
         TextRepo = Database.queryTableAll(SQLTable)
     elif len(TextRepo) == 1:
