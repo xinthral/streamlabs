@@ -32,7 +32,7 @@ def checkVersion(Parent):
     updateMessage = "xBot has an update pending : {}".format(latestVersion)
     if latestVersion != Version:
         Log(Parent, 'VersionCheck', updateMessage)
-        send_message(Parent, updateMessage + ': https://github.com/xinthral/streamlabs')
+        send_message(Parent, updateMessage + ': https://github.com/xinthral/streamlabs/blob/main/xbot.zip')
 
 def getFact(Parent):
     """ Randomly Query a fact from the internets """
