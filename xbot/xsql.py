@@ -15,6 +15,7 @@ finally:
 class Database:
     """ Static Class Scope Variables """
     _delim = ';::;'
+    # _library = 'library.db'
     _library = 'Services/Scripts/xbot/library.db'
     _tables = ['facts', 'jokes', 'phrases', 'rather']
 
@@ -39,13 +40,23 @@ class Database:
         return(rows)
 
     @staticmethod
+    def queryTableID(item_id=0, tbl_name=_tables[0]):
+        """ Query a specific items ID from a specific database in the database object """
+        con = Database.create_connection()
+        c = con.cursor()
+        c.execute("SELECT * FROM {} WHERE pid={}".format(tbl_name, item_id))
+        item = c.fetchone()
+        con.close()
+        return(item)
+
+    @staticmethod
     def getTableHeaders(tbl_name=_tables[0]):
         """ Query Headers for specific table in database object """
         return([ele[1] for ele in Database.showTableSchema(tbl_name)])
 
     @staticmethod
-    def insert(payload, tbl_name=_tables[0], delim=_delim):
-        if len(payload[0].split(delim)) < 1:
+    def insert(payload, tbl_name=_tables[0]):
+        if len(payload[0].split(Database._delim)) < 1:
             print('Empty Payload')
             return(False)
 
@@ -85,6 +96,24 @@ class Database:
         """ Inserts would you rather payload into database object (wrapper) """
         #payload: ['input text', 'category', blocked: 0/1]
         return(Database.insert(payload, 'rather'))
+
+    @staticmethod
+    def updateVisibility(payload):
+        """ Update visibility value for a record """
+        if len(payload[0].split(Database._delim)) < 1:
+            print('Empty Payload')
+            return(False)
+
+        # table, column, value, pid
+        table, column, value, pid = payload
+        table.replace('"', '""')
+        column.replace('"', '""')
+        con = Database.create_connection()
+        c = con.cursor()
+        c.execute('UPDATE "{}" SET "{}" = {} WHERE pid = {}'.format(table, column, value, pid))
+        con.commit()
+        con.close()
+        return(True)
 
     @staticmethod
     def showTables():
