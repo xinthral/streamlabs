@@ -27,6 +27,7 @@ Phrases = list()
 Rathers = list()
 
 def checkVersion(Parent):
+    """ Call back function to check github version """
     # '{\n "code": 200,\n "response": "0.0.1\n"\n}'
     req = Parent.GetRequest(versionURL, {})
     latestVersion = versionRegex.search(req).group(0)
@@ -38,8 +39,10 @@ def checkVersion(Parent):
 def getFact(Parent):
     """ Randomly Query a fact from the internets """
     url = 'http://randomfactgenerator.net/'
-    fact = Parent.GetRequest(url, {})
-    return(fact.split("<div id='z'>")[1].split('<br/>')[0])
+    raw_html = Parent.GetRequest(url, {})
+    fact = raw_html.split("<div id='z'>")[1].split('<br/>')[0]
+    Database.insertFact((fact, 'random', 1))
+    return(fact)
 
 def getRepo(SQLTable):
     """ Select active repository """
