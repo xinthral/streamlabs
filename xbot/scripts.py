@@ -15,6 +15,7 @@ finally:
     from settings import MySettings
     from xsql import Database
 
+""" Globals """
 random.seed(time.time())
 Options = MySettings._Options
 Version = MySettings._Version
