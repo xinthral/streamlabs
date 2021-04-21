@@ -17,7 +17,7 @@ class Database:
     _delim = ';::;'
     # _library = 'library.db'
     _library = 'Services/Scripts/xbot/library.db'
-    _tables = ['facts', 'jokes', 'phrases', 'rather']
+    _tables = ['facts', 'fortunes', 'jokes', 'phrases', 'rather']
 
     @staticmethod
     def create_connection(db_file=_library):
@@ -78,6 +78,12 @@ class Database:
         """ Insert fact payload into database object (wrapper) """
         #payload: ['input text', 'category', blocked: 0/1]
         return(Database.insert(payload, 'facts'))
+
+    @staticmethod
+    def insertFortune(payload):
+        """ Insert fact payload into database object (wrapper) """
+        #payload: ['input text', 'category', blocked: 0/1]
+        return(Database.insert(payload, 'fortunes'))
 
     @staticmethod
     def insertJoke(payload):

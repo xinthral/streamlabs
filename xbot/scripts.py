@@ -21,6 +21,7 @@ Version = MySettings._Version
 versionRegex = re.compile(r"(\d\.\d\.\d)")
 versionURL = 'https://raw.githubusercontent.com/xinthral/streamlabs/main/version.txt'
 Facts = list()
+Fortunes = list()
 Jokes = list()
 Phrases = list()
 Rathers = list()
@@ -42,10 +43,12 @@ def getFact(Parent):
 
 def getRepo(SQLTable):
     """ Select active repository """
-    global Facts, Jokes, Phrases, Rathers
+    global Facts, Fortunes, Jokes, Phrases, Rathers
     responseRepo = None
     if SQLTable == 'facts':
         responseRepo = Facts
+    if SQLTable == 'fortunes':
+        responseRepo = Fortunes
     if SQLTable == 'jokes':
         responseRepo = Jokes
     if SQLTable == 'phrases':
