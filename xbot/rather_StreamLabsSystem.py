@@ -20,7 +20,7 @@ Description = "Questionnaire Script for the memez"
 Creator = "Xinthral"
 Version = MySettings._Version
 Command = "!rather"
-SQLTable = "rather"
+SQLTable = "rathers"
 
 def Init():
     """ Constructor API Method """
